@@ -19,6 +19,11 @@ param (
 	[string]$parentfilter = ".+"
 )
 
+# Add the wildcard if necessary
+if ($false -eq $path.Contains("*")) {
+	$path = $path + "*"
+}
+
 # We're dealing with zip files, so we'll need to unzip and dispose of them
 Add-Type -assembly "System.IO.Compression.FileSystem"
 
@@ -149,11 +154,12 @@ $Result = ForEach($folder in $folders) {
 			FlashPercent = $flashPercent
 			CreationTime = $zipPath.CreationTime
 			LastWrite = $zipPath.LastWriteTime
+			FullPath = $zipPath.FullName
 		}
 		Write-Host "  -[adding]: $($zipPath.Name)"
 	}
 }
 
 #Export everything
-Write-Host "`nExporting results to $(Resolve-Path $out)`n"
+Write-Host "`nExporting results to $($out)`n"
 $Result | Export-Csv $out
