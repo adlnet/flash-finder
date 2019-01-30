@@ -5,8 +5,8 @@ Set of scripts intended to help determine the severity of Flash Deprecation on a
 This is a **PowerShell** script for locating Flash-based SCORM content on a local machine.  
 
 To run this script, you will need a PowerShell terminal active.  To do this, either:
-1. <kbd>Ctrl</kbd>+<kbd>R</kbd> and type `powershell`
-1. <kbd>Shift</kbd>+<kbd>Right-Click</kbd> and select `Open PowerShell window here`
+- <kbd>Ctrl</kbd>+<kbd>R</kbd> and type `powershell`, or
+- <kbd>Shift</kbd>+<kbd>Right-Click</kbd> and select `Open PowerShell window here`
 
 ### How to use
 Before going into detail, a typical usage would be:
