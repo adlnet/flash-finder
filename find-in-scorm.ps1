@@ -29,15 +29,20 @@ Add-Type -assembly "System.IO.Compression.FileSystem"
 
 Write-Host "`nChecking for SWF files within zipped SCORM modules..."
 
-$folders = Get-ChildItem $path -Recurse -Attributes d | Sort-Object -Property name -Descending
+# Filter for every SWF file in the given path, including sub-folders
+$allFolders = New-Object System.Collections.Generic.List[System.Object]
+$subFolders = Get-ChildItem $path  -Recurse -Attributes d | Sort-Object -Property name -Descending
 
 # Check if they only specified one folder
-if ($folders.count -eq 0) {
-	$folder = Get-Item $path
-	$folders = @($folder)
+if (Test-Path $path -PathType Container) {
+	$current = Get-Item $path
+	$allFolders.Add($current);
+}
+ForEach ($sub in $subFolders) {
+	$allFolders.add($sub)
 }
 
-$Result = ForEach($folder in $folders) {
+$Result = ForEach($folder in $allFolders) {
 
 	# Make sure we only search in the designated folders
 	if ($folder.FullName -notmatch $filter) {

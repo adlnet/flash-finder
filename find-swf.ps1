@@ -30,16 +30,20 @@ if ($false -eq $path.Contains("*")) {
 Write-Host "`nChecking for SWF files ...`n"
 
 # Filter for every SWF file in the given path, including sub-folders
-$folders = Get-ChildItem $path  -Recurse -Attributes d | Sort-Object -Property name -Descending
+$allFolders = New-Object System.Collections.Generic.List[System.Object]
+$subFolders = Get-ChildItem $path  -Recurse -Attributes d | Sort-Object -Property name -Descending
 
 # Check if they only specified one folder
-if ($folders.count -eq 0) {
-	$folder = Get-Item $path
-	$folders = @($folder)
+if (Test-Path $path -PathType Container) {
+	$current = Get-Item $path
+	$allFolders.Add($current);
+}
+ForEach ($sub in $subFolders) {
+	$allFolders.add($sub)
 }
 
 # Iterate over each SWF file to see if it follows our parent filter
-ForEach($folder in $folders) {
+ForEach($folder in $allFolders) {
 
 	# Make sure we only search in the designated folders
 	if ($folder.FullName -notmatch $filter) {
