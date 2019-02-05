@@ -1,12 +1,28 @@
-# Flash Finder Scripts
+## Flash Finder Scripts
 Set of scripts intended to help determine the severity of Flash Deprecation on a training corpus.  Additional scripts will be added over time.  
 
-## Find SCORM Content: `find.ps1`
-This is a **PowerShell** script for locating Flash-based SCORM content on a local machine.  
+These are **PowerShell** scripts for locating Flash-based content on a local machine.  
 
-To run this script, you will need a PowerShell terminal active.  To do this, either:
+### Getting Started
+As these scripts reference each other, you should either **clone this repository** or **download it as a zip file**.
+
+To run them, you will need a PowerShell terminal active.  To do this, either:
 - <kbd>Ctrl</kbd>+<kbd>R</kbd> and type `powershell`, or
 - <kbd>Shift</kbd>+<kbd>Right-Click</kbd> and select `Open PowerShell window here`
+
+### What's in the box?
+The current scripts will tackle two problems:
+- How much of my SCORM content depends on Flash
+- How many (and what kind of) SWF files do I have sitting on my machine
+
+### Example
+We'll start with an example before diving into too many details.  Suppose you:
+- have zipped SCORM modules on a Windows machine,
+- want to know how many of these modules depend on Flash, and
+- want to check for everything in some folder at `E:\SCORM`
+
+### Getting Everything
+To check for SWF content embedded in zipped SCORM modules and SWF files sitting in a file system, the `find.ps1` script will run two scripts outlined below: `find-in-scorm.ps1` and `find-swf.ps1`.  These 
 
 ### How to use
 Before going into detail, a typical usage would be:
