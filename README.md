@@ -15,23 +15,23 @@ The current scripts will tackle two problems:
 - How much of my SCORM content depends on Flash
 - How many (and what kind of) SWF files do I have sitting on my machine
 
+## How to use
+As the PowerShell syntax might seem a bit odd, we'll start with an example.
+
 ### Example
-We'll start with an example before diving into too many details.  Suppose you:
+Suppose you:
 - have zipped SCORM modules on a Windows machine,
 - want to know how many of these modules depend on Flash, and
 - want to check for everything in some folder at `E:\SCORM`
 
-### Getting Everything
-To check for SWF content embedded in zipped SCORM modules and SWF files sitting in a file system, the `find.ps1` script will run two scripts outlined below: `find-in-scorm.ps1` and `find-swf.ps1`.  These 
+You would browse to wherever you saved these scripts, open a PowerShell terminal, and type:
+```
+PowerShell -File find.ps1 -Path "E:\SCORM"
+```
 
-### How to use
-Before going into detail, a typical usage would be:
-```
-PowerShell -File find.ps1 -Path "\some\scorm\path"
-```
 Note: If PowerShell complains about your "Execution Policy", then you can bypass that with an argument:
 ```
-PowerShell -File find.ps1 -Path "\some\scorm\path" -ExecutionPolicy Bypass
+PowerShell -File find.ps1 -Path "E:\SCORM" - ExecutionPolicy Bypass
 ```
 Note that the `-Path` argument is optional -- this will default to your execution path if omitted (`.\*`).
 
