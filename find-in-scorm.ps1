@@ -31,6 +31,12 @@ Write-Host "`nChecking for SWF files within zipped SCORM modules..."
 
 $folders = Get-ChildItem $path -Recurse -Attributes d | Sort-Object -Property name -Descending
 
+# Check if they only specified one folder
+if ($folders.count -eq 0) {
+	$folder = Get-Item $path
+	$folders = @($folder)
+}
+
 $Result = ForEach($folder in $folders) {
 
 	# Make sure we only search in the designated folders

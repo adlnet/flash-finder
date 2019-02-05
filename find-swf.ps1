@@ -32,6 +32,12 @@ Write-Host "`nChecking for SWF files ...`n"
 # Filter for every SWF file in the given path, including sub-folders
 $folders = Get-ChildItem $path  -Recurse -Attributes d | Sort-Object -Property name -Descending
 
+# Check if they only specified one folder
+if ($folders.count -eq 0) {
+	$folder = Get-Item $path
+	$folders = @($folder)
+}
+
 # Iterate over each SWF file to see if it follows our parent filter
 ForEach($folder in $folders) {
 
