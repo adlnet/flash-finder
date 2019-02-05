@@ -18,7 +18,7 @@ The current scripts will tackle two problems:
 ## How to use
 As the PowerShell syntax might seem a bit odd, we'll start with an example.
 
-### Example
+### Example 
 Suppose you:
 - have zipped SCORM modules on a Windows machine,
 - want to know how many of these modules depend on Flash, and
@@ -31,20 +31,65 @@ PowerShell -File find.ps1 -Path "E:\SCORM"
 
 Note: If PowerShell complains about your "Execution Policy", then you can bypass that with an argument:
 ```
-PowerShell -File find.ps1 -Path "E:\SCORM" - ExecutionPolicy Bypass
+PowerShell -File find.ps1 -Path "E:\SCORM" -ExecutionPolicy Bypass
 ```
-Note that the `-Path` argument is optional -- this will default to your execution path if omitted (`.\*`).
 
-### What's going on?
-This script will search a given directory, printing the locations of SCORM content in all sub-folders and writing the results to a CSV file.  Those columns will be inferred and not always available:
+The window will then describe what files it's finding and eventually produce two CSV files:
+- *scorm-breakdown.csv*, describing the quantity of Flash content within a SCORM module
+- *swf-locations.csv*, describing any SWF files it encountered in its search
+
+### Example with Filtering
+Suppose now that you want to filter for only SCORM and SWF content contained in specific paths and that our files looked like:
+```
+  - E:
+    - SCORM
+      - Courses
+        - final_t1
+          -Courseware
+            - course.zip
+        - testing_t2
+          -Courseware
+            - course.zip
+        - demo_t2
+          -Courseware
+            - course.zip
+    - Others
+      - Testing
+        - course.zip
+```
+You can filter for a matching path by using the `-filter` argument.  If we only wanted to check those modules with paths resembling `final_*\Courseware`, we could use:
+```
+PowerShell -File find.ps1 -Path "E:\SCORM" -Filter "\\final_.*\\Courseware"
+```
+
+### Running things individually
+While the `find.ps1` script runs the `find-swf.ps1` and `find-in-scorm.ps1` files by default, you can run either of those individually with the same syntax:
+```
+PowerShell -File find-in-scorm.ps1 -Path "E:\SCORM" -Filter "\\final_.*\\Courseware"
+```
+
+## Data Format
+Each script will produce a different CSV summarizing the information it encountered during execution.
+
+### SWF Information
+As the `find-swf.ps1` script checks plain SWF files sitting in a directory, it can read the SWF headers to deduce more granular information about those files.  These CSVs include:
+- SWF Name
+- Flash Version
+- Flash Compression Status
+- Creation Time
+- Last Write Time
+- Full Path of the SWF File
+
+### SCORM Information
+The `find-in-scorm.ps1` script checks zip files and tries to determine whether or not they are zipped SCORM modules.  These CSVs include information about the quantity of SWF content within those modules:
 - Course Name
 - Course Iteration
 - Package Name
 - Authoring Tool
 - Content Type
-- Count of ALL Files
-- Count of SWF Files
-- SWF File Percentage
+- Total Files
+- Total SWF Files
+- SWF Percentage of Total Files
 - Creation Time
-- Last Updated
-- Full Path
+- Last Write Time
+- Full Path of the Zip File
