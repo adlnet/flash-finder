@@ -1,7 +1,7 @@
 # Flash Source File Query v1.0
 A Windows PowerShell script that analyzes the contents of a specified directory and lists how many Flash source files (FLA, FLV, AS, SWC and SWT) it finds. The script is intended primarily for use with courseware source files to help the user determine if the source files actually include Flash source files that can be used to re-develop content.
 
-📥 [Download PowerShell script](https://github.com/TADLP/flash-source-query/archive/1.0.zip)
+📥 [Download PowerShell script](https://github.com/adlnet/flash-finder/tree/master/find-with-source)
 
 ## Instructions
 The instructions below explain how to open the script, use it correctly, and read the output.
