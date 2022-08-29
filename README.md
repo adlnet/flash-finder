@@ -1,5 +1,5 @@
 ## Flash Finder Scripts
-Note: **[Please visit the TADLP GitHub IO page] https://github.com/adlnet/flash-finder/releases/tag/v1.0.1)** for the most recent and reliable versions of these scripts.  These are provided as a slightly modified version of the TADLP work aimed at ease of use. 
+Note: **[Please visit the TADLP GitHub IO page] (https://github.com/adlnet/flash-finder/releases/tag/v1.0.1)** for the most recent and reliable versions of these scripts.  These are provided as a slightly modified version of the TADLP work aimed at ease of use. 
 
 Overall, this is a set of scripts intended to help determine the severity of Flash Deprecation on a training corpus.  Additional scripts will be added over time.  
 
